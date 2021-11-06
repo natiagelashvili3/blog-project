@@ -147,7 +147,11 @@ main{
     background-color: rgb(255 107 107 / 20%);
     color: #ee5253;
 }
-.content table .actions a{
+.content table .actions form{
+    display: inline-block;
+}
+.content table .actions a,
+.content table .actions .delete{
     text-decoration: none;
     color: #464646;
     background-color: #6f5cc4;
@@ -156,6 +160,9 @@ main{
     padding: 5px 15px;
     border-radius: 5px;
     font-size: 14px;
+}
+.content table .actions button{
+    border: 0;
 }
 
 
