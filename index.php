@@ -6,56 +6,40 @@
 
 <?php
 
-if(isset($_POST['action']) && $_POST['action'] == 'delete') {
-    $id = $_POST['id'];
-
-    $sql = "DELETE FROM students where id = " .$id;
-
-    if(mysqli_query($conn, $sql)) {
-        echo "Record Delete";
-    } else {
-        echo "Error";
-    }
-}
 
 // SELECT Query
-$sql = "SELECT * FROM students";
+$sql = "SELECT news.id as news_id, news.title as news_title, news.text, news.category_id, categories.id as cat_id, categories.title as category_title
+          FROM news
+    LEFT JOIN categories ON news.category_id = categories.id";
 $result = mysqli_query($conn, $sql);
-$students = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$news = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 
 ?>
 
 <main>
     <div class="container-header">
-        <h2>Students</h2>
+        <h2>News</h2>
         <a href="form.php" class="btn">Add New</a>
     </div>
     <div class="content">
         <table>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
-                <th>Status</th>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Category</th>
                 <th>Actions</th>
             </tr>
-            <?php foreach($students as $student): ?>
+            <?php foreach($news as $value): ?>
                 <tr>
-                    <td><?= $student['name'] ?></td>
-                    <td><?= $student['lastname'] ?></td>
-                    <td><?= $student['age'] ?></td>
-                    <td>
-                        <?php if($student['status'] == 1){ ?>
-                            <span class="status active">active</span>
-                        <?php } else { ?>
-                            <span class="status inactive">inactive</span>
-                        <?php } ?>
-                    </td>
+                    <td><?= $value['news_id'] ?></td>
+                    <td><?= $value['news_title'] ?></td>
+                    <td><?= $value['category_title'] ?></td>
                     <td class="actions">
-                        <a class="edit" href="edit.php?id=<?= $student['id'] ?>">Edit</a>
+                        <a class="edit" href="edit.php?id=<?= $value['news_id'] ?>">Edit</a>
                         <form action="" method="post">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="id" value="<?= $student['id'] ?>">
+                            <input type="hidden" name="id" value="<?= $value['news_id'] ?>">
                             <button class="delete">Delete</button>
                         </form>
                     </td>

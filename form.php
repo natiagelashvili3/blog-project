@@ -6,16 +6,20 @@
 
 <?php
 
+
+    $sql_categories = "SELECT * FROM categories";
+    $result = mysqli_query($conn, $sql_categories);
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
     // insert
     if(isset($_POST['action']) && $_POST['action'] == 'insert') {
-        $name = isset($_POST['name']) ? $_POST['name'] : '' ;
-        $lastname = isset($_POST['lastname']) ? $_POST['lastname'] : '' ;
-        $age = isset($_POST['age']) ? $_POST['age'] : '' ;
-        $status = isset($_POST['status']) ? $_POST['status'] : '' ;
+        $title = isset($_POST['title']) ? $_POST['title'] : '' ;
+        $text = isset($_POST['text']) ? $_POST['text'] : '' ;
+        $category_id = isset($_POST['category_id']) ? $_POST['category_id'] : '' ;
 
-        if($name && $lastname && $age) {
+        if($title && $text && $category_id) {
 
-            $sql = "INSERT INTO students (name, lastname, age, status) VALUES ('$name', '$lastname', '$age', '$status')";
+            $sql = "INSERT INTO news (title, text, category_id) VALUES ('$title', '$text', '$category_id')";
 
             if(mysqli_query($conn, $sql)) {
                 echo "Record Created";
@@ -29,28 +33,25 @@
 
 <main>
     <div class="container-header">
-        <h2>Students</h2>
+        <h2>News</h2>
         <a href="" class="btn">Add New</a>
     </div>
     <div class="content">
         <form action="" method="post">
             <div class="form-group">
-                <label for="">Name</label>
-                <input type="text" name="name">
+                <label for="">Title</label>
+                <input type="text" name="title">
             </div>
             <div class="form-group">
-                <label for="">Lastname</label>
-                <input type="text" name="lastname">
+                <label for="">Text</label>
+                <textarea name="text" id="" cols="30" rows="10"></textarea>
             </div>
             <div class="form-group">
-                <label for="">Age</label>
-                <input type="text" name="age">
-            </div>
-            <div class="form-group">
-                <label for="">Status</label>
-                <select name="status" id="">
-                    <option value="1">Active</option>
-                    <option value="0">Inactive</option>
+                <label for="">Category</label>
+                <select name="category_id" id="">
+                    <?php foreach($categories as $value): ?>
+                    <option value="<?= $value['id'] ?>"><?= $value['title'] ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group">
