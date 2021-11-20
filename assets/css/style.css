@@ -107,7 +107,7 @@ main{
 
 .content{
     background: white;
-    margin-top: 50px;
+    margin-top: 25px;
     box-shadow: 0px 0px 18px 0px rgba(227,227,227,0.75);
     -webkit-box-shadow: 0px 0px 18px 0px rgba(227,227,227,0.75);
     -moz-box-shadow: 0px 0px 18px 0px rgba(227,227,227,0.75);
@@ -194,4 +194,15 @@ main{
 }
 .content form .submit{
     margin-top: 15px;
+}
+
+.sort{
+    margin-top: 15px;
+}
+.sort input,
+.sort select{
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #dfdfdf;
+    background-color: white;
 }

@@ -23,7 +23,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete'){
 
 
 // SELECT Query
-$sql = "SELECT * FROM categories";
+$sql = "SELECT * FROM categories ORDER BY id DESC";
 $result = mysqli_query($conn, $sql);
 $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
